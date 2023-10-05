@@ -46,24 +46,38 @@ Onödig kodupprepning ska i största mån undvikas.
 
         do {
             boolean placementValid = false;
-            while (placementValid == false) {
+
+            System.out.println(p1.getName() + " place your marker (1-9)");
+            int input = scanner.nextInt();
+            placementValid = b.placeMarker(input, p1.getMarker());
+            b.printBoard();
+            scanner.nextLine();
+
+            while (!placementValid) {
                 System.out.println(p1.getName() + " place your marker (1-9)");
                 int input3 = scanner.nextInt();
                 placementValid = b.placeMarker(input3, p1.getMarker());
                 b.printBoard();
                 scanner.nextLine();
             }
-
             /*if (b.check4Winner(p1.getMarker())){
                 System.out.println( p1.getName() + "Wins");
                 System.out.println("do you wanna play again? (j/n)");
             } */
 
             System.out.println(p2.getName() + " place your marker (1-9)");
-            int input2 = scanner.nextInt();
-            b.placeMarker(input2, p2.getMarker());
+            int input4 = scanner.nextInt();
+            placementValid = b.placeMarker(input4, p2.getMarker());
             b.printBoard();
             scanner.nextLine();
+
+            while (!placementValid) {
+                System.out.println(p2.getName() + " place your marker (1-9)");
+                int input2 = scanner.nextInt();
+                placementValid = b.placeMarker(input2, p2.getMarker());
+                b.printBoard();
+                scanner.nextLine();
+            }
 
         } while (!b.winner);
 
