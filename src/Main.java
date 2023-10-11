@@ -3,6 +3,97 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        Board board = new Board();
+
+        Players p1 = new Players("Långben", 'X');
+        Players p2 = new Players("Musse", 'O');
+
+
+        board.printBoard();
+
+        do {
+            boolean placementValid = false;
+
+            //Player 1
+
+            System.out.println(p1.getName() + " place your marker (1-9)");
+            int input = scanner.nextInt();
+            placementValid = board.placeMarker(input, p1.getMarker());
+            board.printBoard();
+            scanner.nextLine();
+
+            while (!placementValid) {
+                System.out.println(p1.getName() + " That space is occupied, please replace your marker");
+                int input2 = scanner.nextInt();
+                placementValid = board.placeMarker(input2, p1.getMarker());
+                board.printBoard();
+                scanner.nextLine();
+            }
+            //Check win for player1
+            if (board.checkWinner(p1.getMarker())) {
+                System.out.println(p1.getName() + " Congratualtions, you win!");
+                System.out.println("Wanna play again? (y/n)");
+                String yn = scanner.next();
+                if (yn.equalsIgnoreCase("y")) {
+
+                } else break;
+                if (board.gameOver()) {
+                    System.out.println("It´s a draw");
+                    System.out.println("Wanna play again? (y/n)");
+                    String YN = scanner.next();
+                    if (YN.equalsIgnoreCase("y")) {
+
+                    } else break;
+                }
+            }
+
+            //Player 2
+
+            System.out.println(p2.getName() + " place your marker (1-9)");
+            int input3 = scanner.nextInt();
+            placementValid = board.placeMarker(input3, p2.getMarker());
+            board.printBoard();
+            scanner.nextLine();
+
+            while (!placementValid) {
+                System.out.println(p2.getName() + "That space is occupied, please replace your marker");
+                int input4 = scanner.nextInt();
+                placementValid = board.placeMarker(input4, p2.getMarker());
+                board.printBoard();
+                scanner.nextLine();
+            }
+
+            //Check win for player2
+
+            if (board.checkWinner(p2.getMarker())) {
+                System.out.println(p2.getName() + " Congratualtions, you win!");
+                System.out.println("Wanna play again? (y/n)");
+                String yn = scanner.next();
+                if (yn.equalsIgnoreCase("y")) {
+
+                } else break;
+
+                if (board.gameOver()) {
+                    System.out.println("It´s a draw");
+                    System.out.println("Wanna play again? (y/n)");
+                    String YN = scanner.next();
+                    if (YN.equalsIgnoreCase("y")) {
+
+                    } else break;
+                }
+            }
+        } while (true);
+
+    }
+}
+
+
+
+
+
         /*
         -två mänskliga spelare i terminalen/kommandotolken.
         - Varje spelare turas om att ange var i ett 3x3-rutnät spelaren önskar placera X (eller O).
@@ -31,57 +122,3 @@ Dessutom ska koden vara strukturerad och du ska visa på att du förstår och ka
 
 Onödig kodupprepning ska i största mån undvikas.
          */
-
-        Scanner scanner = new Scanner(System.in);
-
-
-        Board b = new Board();
-        b.printBoard();
-
-        ArrayList<Players> players = new ArrayList<>();
-
-        Players p1 = new Players("Långben", 'X');
-        Players p2 = new Players("Musse", 'O');
-
-
-        do {
-            boolean placementValid = false;
-
-            System.out.println(p1.getName() + " place your marker (1-9)");
-            int input = scanner.nextInt();
-            placementValid = b.placeMarker(input, p1.getMarker());
-            b.printBoard();
-            scanner.nextLine();
-
-            while (!placementValid) {
-                System.out.println(p1.getName() + " place your marker (1-9)");
-                int input3 = scanner.nextInt();
-                placementValid = b.placeMarker(input3, p1.getMarker());
-                b.printBoard();
-                scanner.nextLine();
-            }
-            /*if (b.check4Winner(p1.getMarker())){
-                System.out.println( p1.getName() + "Wins");
-                System.out.println("do you wanna play again? (j/n)");
-            } */
-
-            System.out.println(p2.getName() + " place your marker (1-9)");
-            int input4 = scanner.nextInt();
-            placementValid = b.placeMarker(input4, p2.getMarker());
-            b.printBoard();
-            scanner.nextLine();
-
-            while (!placementValid) {
-                System.out.println(p2.getName() + " place your marker (1-9)");
-                int input2 = scanner.nextInt();
-                placementValid = b.placeMarker(input2, p2.getMarker());
-                b.printBoard();
-                scanner.nextLine();
-            }
-
-        } while (!b.winner);
-
-
-    }
-}
-
