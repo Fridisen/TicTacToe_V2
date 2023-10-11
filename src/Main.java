@@ -1,94 +1,95 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-
-        Board board = new Board();
-
-        Players p1 = new Players("Långben", 'X');
-        Players p2 = new Players("Musse", 'O');
-
-
-        board.printBoard();
+        boolean playAgain = true;
 
         do {
-            boolean placementValid = false;
+            Board board = new Board();
+            Players p1 = new Players("Långben", 'X');
+            Players p2 = new Players("Musse", 'O');
 
-            //Player 1
-
-            System.out.println(p1.getName() + " place your marker (1-9)");
-            int input = scanner.nextInt();
-            placementValid = board.placeMarker(input, p1.getMarker());
             board.printBoard();
-            scanner.nextLine();
+            boolean continuePlaying = true;
 
-            while (!placementValid) {
-                System.out.println(p1.getName() + " That space is occupied, please replace your marker");
-                int input2 = scanner.nextInt();
-                placementValid = board.placeMarker(input2, p1.getMarker());
+
+            do {
+                boolean placementValid = false;
+
+                //Player 1
+
+                System.out.println(p1.getName() + " place your marker (1-9)");
+                int input = scanner.nextInt();
+                placementValid = board.placeMarker(input, p1.getMarker());
                 board.printBoard();
                 scanner.nextLine();
-            }
-            //Check win for player1
-            if (board.checkWinner(p1.getMarker())) {
-                System.out.println(p1.getName() + " Congratualtions, you win!");
-                System.out.println("Wanna play again? (y/n)");
-                String yn = scanner.next();
-                if (yn.equalsIgnoreCase("y")) {
 
-                } else break;
-                if (board.gameOver()) {
-                    System.out.println("It´s a draw");
-                    System.out.println("Wanna play again? (y/n)");
-                    String YN = scanner.next();
-                    if (YN.equalsIgnoreCase("y")) {
-
-                    } else break;
+                while (!placementValid) {
+                    System.out.println(p1.getName() + " That space is occupied, please replace your marker");
+                    int input2 = scanner.nextInt();
+                    placementValid = board.placeMarker(input2, p1.getMarker());
+                    board.printBoard();
+                    scanner.nextLine();
                 }
-            }
+                //Check win for player1
+                if (board.checkWinner(p1.getMarker())) {
+                    System.out.println(p1.getName() + " Congratualtions, you win!");
+                    continuePlaying = !askPlayAgain(scanner);
+                    }
 
-            //Player 2
+                    if (board.gameOver()) {
+                        System.out.println("It´s a draw");
+                        continuePlaying = !askPlayAgain(scanner);
+                }
 
-            System.out.println(p2.getName() + " place your marker (1-9)");
-            int input3 = scanner.nextInt();
-            placementValid = board.placeMarker(input3, p2.getMarker());
-            board.printBoard();
-            scanner.nextLine();
+                //Player 2
 
-            while (!placementValid) {
-                System.out.println(p2.getName() + "That space is occupied, please replace your marker");
-                int input4 = scanner.nextInt();
-                placementValid = board.placeMarker(input4, p2.getMarker());
+                System.out.println(p2.getName() + " place your marker (1-9)");
+                int input3 = scanner.nextInt();
+                placementValid = board.placeMarker(input3, p2.getMarker());
                 board.printBoard();
                 scanner.nextLine();
-            }
 
-            //Check win for player2
+                while (!placementValid) {
+                    System.out.println(p2.getName() + "That space is occupied, please replace your marker");
+                    int input4 = scanner.nextInt();
+                    placementValid = board.placeMarker(input4, p2.getMarker());
+                    board.printBoard();
+                    scanner.nextLine();
+                }
 
-            if (board.checkWinner(p2.getMarker())) {
-                System.out.println(p2.getName() + " Congratualtions, you win!");
-                System.out.println("Wanna play again? (y/n)");
-                String yn = scanner.next();
-                if (yn.equalsIgnoreCase("y")) {
+                //Check win for player2
 
-                } else break;
+                    if (board.checkWinner(p2.getMarker())) {
+                        System.out.println(p2.getName() + " Congratualtions, you win!");
+                        continuePlaying = !askPlayAgain(scanner);
+                    }
 
                 if (board.gameOver()) {
                     System.out.println("It´s a draw");
-                    System.out.println("Wanna play again? (y/n)");
-                    String YN = scanner.next();
-                    if (YN.equalsIgnoreCase("y")) {
-
-                    } else break;
+                    continuePlaying = !askPlayAgain(scanner);
                 }
-            }
-        } while (true);
+
+            } while (continuePlaying);
+
+        } while (playAgain);
+
 
     }
+    public static boolean askPlayAgain(Scanner scanner) {
+        System.out.println("Wanna play again? (y/n)");
+        String response = scanner.next();
+        if (response.equalsIgnoreCase("n")) {
+            scanner.close();
+        }
+       return response.equalsIgnoreCase("y");
+    }
+
+
 }
+
 
 
 

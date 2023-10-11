@@ -64,8 +64,6 @@ public class Board {
         return true;
     }
 
-
-
         public boolean checkWinner(char marker) {
             //  horisontella
             for (int row = 0; row < 3; row++) {
@@ -75,8 +73,8 @@ public class Board {
                     return true;
                 }
         } // vertikala
-            for (int col = 0; col<3; col++){
-                if (board[col][0] == marker && board[col][1] == marker && board[col][2] == marker) {
+            for (int col = 0; col < 3; col++){
+                if (board[0][col] == marker && board[1][col] == marker && board[2][col] == marker) {
                     winner = true;
                     System.out.println("We have a winner");
                     return true;
@@ -92,7 +90,6 @@ public class Board {
                 System.out.println("We have a winner");
                 return true;
             }
-
             else return false;
         }
 
