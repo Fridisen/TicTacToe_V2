@@ -64,51 +64,57 @@ public class Board {
         return true;
     }
 
-        public boolean checkWinner(char marker) {
-            //  horisontella
-            for (int row = 0; row < 3; row++) {
-                if (board[row][0] == marker && board[row][1] == marker && board[row][2] == marker) {
-                    winner = true;
-                    System.out.println("We have a winner");
-                    return true;
-                }
-        } // vertikala
-            for (int col = 0; col < 3; col++){
-                if (board[0][col] == marker && board[1][col] == marker && board[2][col] == marker) {
-                    winner = true;
-                    System.out.println("We have a winner");
-                    return true;
-                }
-            } //diagonala
-            if (board[0][0] == marker && board[1][1] == marker && board[2][2] == marker) {
-                winner = true;
-                System.out.println("We have a winner");
-                return true;
-            }
-            if (board[0][2] == marker && board[1][1] == marker && board[2][0] == marker) {
-                winner = true;
-                System.out.println("We have a winner");
-                return true;
-            }
-            else return false;
-        }
-
-
-        public boolean gameOver() {
+    public boolean checkWinner(char marker) {
+        //  horisontella
         for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++){
-                if (board[row][col] == ' '){
+            if (board[row][0] == marker && board[row][1] == marker && board[row][2] == marker) {
+                winner = true;
+                System.out.println("We have a winner");
+                return true;
+            }
+        } // vertikala
+        for (int col = 0; col < 3; col++) {
+            if (board[0][col] == marker && board[1][col] == marker && board[2][col] == marker) {
+                winner = true;
+                System.out.println("We have a winner");
+                return true;
+            }
+        } //diagonala
+        if (board[0][0] == marker && board[1][1] == marker && board[2][2] == marker) {
+            winner = true;
+            System.out.println("We have a winner");
+            return true;
+        }
+        if (board[0][2] == marker && board[1][1] == marker && board[2][0] == marker) {
+            winner = true;
+            System.out.println("We have a winner");
+            return true;
+        } else return false;
+    }
+
+
+    public boolean gameOver() {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                if (board[row][col] == ' ') {
                     return false;
                 }
             }
         }
-            System.out.println("GameOver nobody won this round");
+        System.out.println("GameOver nobody won this round");
         return true;
+    }
+
+    public void resetBoard() {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                board[row][col] = ' ';
+            }
         }
-
-
+        winner = false;
 
     }
+}
 
 
 

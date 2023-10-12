@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        boolean playAgain = true;
+        boolean askPlayAgain = true;
 
         do {
             Board board = new Board();
@@ -36,13 +36,18 @@ public class Main {
                 //Check win for player1
                 if (board.checkWinner(p1.getMarker())) {
                     System.out.println(p1.getName() + " Congratualtions, you win!");
-                    continuePlaying = !askPlayAgain(scanner);
+                    board.resetBoard();
+                    continuePlaying = false;
                     }
 
                     if (board.gameOver()) {
                         System.out.println("It´s a draw");
-                        continuePlaying = !askPlayAgain(scanner);
+                        board.resetBoard();
+                        continuePlaying = false;
                 }
+                    if (!continuePlaying){
+                        break;
+                    }
 
                 //Player 2
 
@@ -64,29 +69,31 @@ public class Main {
 
                     if (board.checkWinner(p2.getMarker())) {
                         System.out.println(p2.getName() + " Congratualtions, you win!");
-                        continuePlaying = !askPlayAgain(scanner);
+                        board.resetBoard();
+                        continuePlaying = false;
                     }
 
                 if (board.gameOver()) {
                     System.out.println("It´s a draw");
-                    continuePlaying = !askPlayAgain(scanner);
+                    board.resetBoard();
+                    continuePlaying = false;
+                }
+                if (!continuePlaying) {
+                    break;
                 }
 
             } while (continuePlaying);
 
-        } while (playAgain);
+            System.out.println("Wanna play again (y/n)");
+            String response = scanner.next();;
+            if (!response.equalsIgnoreCase("y")) {
+                askPlayAgain = false;
+            }
+
+        } while (askPlayAgain);
 
 
     }
-    public static boolean askPlayAgain(Scanner scanner) {
-        System.out.println("Wanna play again? (y/n)");
-        String response = scanner.next();
-        if (response.equalsIgnoreCase("n")) {
-            scanner.close();
-        }
-       return response.equalsIgnoreCase("y");
-    }
-
 
 }
 
